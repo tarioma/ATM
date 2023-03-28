@@ -1,0 +1,42 @@
+CREATE TABLE Bank
+(
+	Name VARCHAR(255) PRIMARY KEY,
+	ClientPassportNumber VARCHAR(16) UNIQUE NOT NULL
+);
+
+CREATE TABLE ATM
+(
+	Address VARCHAR(255) PRIMARY KEY,
+	RemainingCurrency MONEY NOT NULL,
+	BankName VARCHAR(255) REFERENCES Bank (Name)
+);
+
+CREATE TABLE Client
+(
+  PassportId VARCHAR(16) PRIMARY KEY,
+	FirstName VARCHAR(20) NOT NULL,
+	LastName VARCHAR(20) NOT NULL,
+	Patronumic VARCHAR(20),
+	Balance MONEY NOT NULL,
+	Phone VARCHAR(14),
+	Address VARCHAR(255) NOT NULL,
+	BankName VARCHAR(255) REFERENCES Bank (Name)
+);
+
+CREATE TABLE CreditCard
+(
+  Number VARCHAR(24) PRIMARY KEY,
+	ValidityPerion DATE NOT NULL,
+	CVV INT NOT NULL,
+	Fee DECIMAL NOT NULL,
+	ClientPassportId VARCHAR(16) REFERENCES Client (PassportId)
+);
+
+CREATE TABLE Operation
+(
+  Date DATE PRIMARY KEY,
+	Amount MONEY NOT NULL,
+	ATMAddress VARCHAR(255) NOT NULL,
+	CreditCardNumber VARCHAR(24) REFERENCES CreditCard (Number),
+	ClientPassportId VARCHAR(16) REFERENCES Client (PassportId)
+);
