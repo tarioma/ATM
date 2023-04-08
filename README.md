@@ -17,12 +17,4 @@
 -	банкомат не обязательно осуществляет постоянно операции выдачи наличных денег. Каждая операция выдачи наличных денег обязательно связана с банкоматом; 
 -	клиент не обязательно осуществляет операции обналичивания денег. Каждая операция обналичивания денег обязательно связана с клиентом.
 
-<p align="center">
-  <img src="https://user-images.githubusercontent.com/125894838/228334532-ce0b577a-f791-483e-a510-ea8380d32df1.png" />
-  <img src="https://user-images.githubusercontent.com/125894838/228334592-2121213e-a7b9-4fed-bf13-80cbb1da224d.png" />
-  <img src="https://user-images.githubusercontent.com/125894838/228333588-c28fc529-a469-4149-9b3c-4cc144b85d6c.png" />
-  <img src="https://user-images.githubusercontent.com/125894838/228333610-78723950-d49f-44ea-b23c-9646eee73bf9.png" />
-  <img src="https://user-images.githubusercontent.com/125894838/228333412-ad436fe9-016a-46b7-8881-67fd9be02af8.png" />
-  <img src="https://user-images.githubusercontent.com/125894838/228333454-a079e028-d52f-4b82-a42d-4b63ec1bfbbf.png" />
-  <img src="https://user-images.githubusercontent.com/125894838/228333493-7b8dd089-d1b9-4851-aceb-b07ac12d0b69.png" />
-</p>
+<img src="https://user-images.githubusercontent.com/125894838/230734654-0efee24a-c5b3-4c08-a778-9684cfe0e9a8.png" />
