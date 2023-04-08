@@ -1,6 +1,6 @@
 CREATE TABLE bank
 (
-    id   INT PRIMARY KEY,
+    id     INT PRIMARY KEY,
     "name" VARCHAR(255) NOT NULL UNIQUE CHECK (LENGTH(Name) BETWEEN 2 AND 255)
 );
 
@@ -35,7 +35,7 @@ CREATE TABLE credit_card
 
 CREATE TABLE operation
 (
-    "date"               DATE PRIMARY KEY,
+    "date"             DATE PRIMARY KEY,
     amount             MONEY NOT NULL CHECK (amount > '0'::MONEY),
     atm_number         INT   NOT NULL REFERENCES atm (number),
     credit_card_number BIGINT REFERENCES credit_card (number)
