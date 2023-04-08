@@ -1,42 +1,42 @@
-CREATE TABLE Bank
+CREATE TABLE bank
 (
-	Name VARCHAR(255) PRIMARY KEY,
-	ClientPassportNumber VARCHAR(16) UNIQUE NOT NULL
+    id   INT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL UNIQUE CHECK (LENGTH(Name) BETWEEN 2 AND 255)
 );
 
-CREATE TABLE ATM
+CREATE TABLE atm
 (
-	Address VARCHAR(255) PRIMARY KEY,
-	RemainingCurrency MONEY NOT NULL,
-	BankName VARCHAR(255) REFERENCES Bank (Name)
+    number             INT PRIMARY KEY,
+    address            VARCHAR(255) NOT NULL CHECK (LENGTH(Address) BETWEEN 2 AND 255),
+    remaining_currency MONEY        NOT NULL,
+    bank_id            INT          NOT NULL REFERENCES bank (id)
 );
 
-CREATE TABLE Client
+CREATE TABLE client
 (
-	  PassportId VARCHAR(16) PRIMARY KEY,
-	FirstName VARCHAR(20) NOT NULL,
-	LastName VARCHAR(20) NOT NULL,
-	Patronumic VARCHAR(20),
-	Balance MONEY NOT NULL,
-	Phone VARCHAR(14),
-	Address VARCHAR(255) NOT NULL,
-	BankName VARCHAR(255) REFERENCES Bank (Name)
+    passport_id INT PRIMARY KEY,
+    first_name  VARCHAR(20)  NOT NULL CHECK (LENGTH(first_name) BETWEEN 2 AND 20),
+    last_name   VARCHAR(20)  NOT NULL CHECK (LENGTH(last_name) BETWEEN 2 AND 20),
+    patronumic  VARCHAR(20) CHECK (LENGTH(last_name) BETWEEN 2 AND 20 or last_name IS NULL),
+    balance     MONEY        NOT NULL CHECK (balance >= 0),
+    phone       VARCHAR(14) CHECK (LENGTH(phone) BETWEEN 5 AND 20 or phone IS NULL),
+    address     VARCHAR(255) NOT NULL CHECK (LENGTH(Address) BETWEEN 8 AND 255),
+    bank_id     INT          NOT NULL REFERENCES bank (id)
 );
 
-CREATE TABLE CreditCard
+CREATE TABLE credit_card
 (
-	  Number VARCHAR(24) PRIMARY KEY,
-	ValidityPerion DATE NOT NULL,
-	CVV INT NOT NULL,
-	Fee DECIMAL NOT NULL,
-	ClientPassportId VARCHAR(16) REFERENCES Client (PassportId)
+    number             BIGINT PRIMARY KEY,
+    validity_perion    DATE     NOT NULL,
+    cvv                SMALLINT NOT NULL CHECK (cvv BETWEEN 1 AND 999),
+    fee                DECIMAL  NOT NULL CHECK (fee BETWEEN 1 AND 100),
+    client_passport_id INT REFERENCES client (passport_id)
 );
 
-CREATE TABLE Operation
+CREATE TABLE operation
 (
-	  Date DATE PRIMARY KEY,
-	Amount MONEY NOT NULL,
-	ATMAddress VARCHAR(255) NOT NULL,
-	CreditCardNumber VARCHAR(24) REFERENCES CreditCard (Number),
-	ClientPassportId VARCHAR(16) REFERENCES Client (PassportId)
+    date               DATE PRIMARY KEY,
+    amount             MONEY NOT NULL CHECK (amount > 0),
+    atm_number         INT   NOT NULL REFERENCES atm (number),
+    credit_card_number BIGINT REFERENCES credit_card (number)
 );
