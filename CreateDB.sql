@@ -26,7 +26,7 @@ CREATE TABLE client
 
 CREATE TABLE credit_card
 (
-    number             BIGINT PRIMARY KEY,
+    number             VARCHAR(16) PRIMARY KEY,
     validity_person    DATE     NOT NULL,
     cvv                SMALLINT NOT NULL CHECK (cvv BETWEEN 1 AND 999),
     fee                DECIMAL  NOT NULL CHECK (fee BETWEEN 1 AND 100),
@@ -35,8 +35,9 @@ CREATE TABLE credit_card
 
 CREATE TABLE operation
 (
-    "date"             DATE PRIMARY KEY,
+    id                 INT PRIMARY KEY,
+    "date"             DATE NOT NULL,
     amount             MONEY NOT NULL CHECK (amount > '0'::MONEY),
     atm_number         INT   NOT NULL REFERENCES atm (number),
-    credit_card_number BIGINT REFERENCES credit_card (number)
+    credit_card_number VARCHAR(16) REFERENCES credit_card (number)
 );
